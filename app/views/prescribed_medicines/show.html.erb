@@ -1,0 +1,56 @@
+<div style="margin-left:2%;margin-top: 2%;">  
+  
+  <p>
+    <strong>Medicine:</strong>
+    <%= @prescribed_medicine.medicine.name %>
+  </p>
+
+  <p>
+    <strong>Prescription:</strong>
+    <%= @prescribed_medicine.prescription.notes %>
+  </p>
+
+  <p>
+    <strong>Notes:</strong>
+    <%= @prescribed_medicine.notes %>
+  </p>
+
+  <p>
+    <strong>Before breakfast:</strong>
+    <%= @prescribed_medicine.before_breakfast %>
+  </p>
+
+  <p>
+    <strong>After breakfast:</strong>
+    <%= @prescribed_medicine.after_breakfast %>
+  </p>
+
+  <p>
+    <strong>Before lunch:</strong>
+    <%= @prescribed_medicine.before_lunch %>
+  </p>
+
+  <p>
+    <strong>After lunch:</strong>
+    <%= @prescribed_medicine.after_lunch %>
+  </p>
+
+  <p>
+    <strong>Before dinner:</strong>
+    <%= @prescribed_medicine.before_dinner %>
+  </p>
+
+  <p>
+    <strong>After dinner:</strong>
+    <%= @prescribed_medicine.after_dinner %>
+  </p>
+
+  <p>
+    <strong>Availble count:</strong>
+    <%= @prescribed_medicine.available_count %>
+  </p>
+
+  <%= link_to 'Edit', edit_prescribed_medicine_path(@prescribed_medicine), class: 'btn btn-primary'  %> |
+  <%= link_to 'Back', prescribed_medicines_path, class: 'btn btn-secondary'  %> |
+  <%= link_to 'Destroy', prescribed_medicine_path(@prescribed_medicine), method: :delete, data: { confirm: 'Are you sure you want to delete this record?' }, class: 'btn btn-warning'  %>
+</div>

@@ -1,0 +1,96 @@
+<%= form_with(model: prescribed_medicine, class: 'pure-form pure-form-aligned', local: true) do |form| %>
+  <% if prescribed_medicine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(prescribed_medicine.errors.count, "error") %> prohibited this prescribed_medicine from being saved:</h2>
+
+      <ul>
+      <% prescribed_medicine.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if @medicine %>
+    <div>Medicine: <%= @medicine.name%></div>
+    <%= form.hidden_field :medicine_id, :value => @medicine.id%>
+  <% else %>
+    <div class="form-group">
+      <%= form.label :medicine_id, class: "control-label col-sm-2" %>
+      <div class="col-sm-4">
+        <%= form.select :medicine_id, options_for_select(@medicines.map{ |m| [m.name, m.id, {'name'=>m.name}] }, selected_key = form.object.medicine_id) ,class: "form-control"%>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @prescription %>
+    <div>Prescription: <%= @prescription.notes %></div>
+    <%= form.hidden_field :prescription_id, :value => @prescription.id%>
+  <% else %>
+    <div class="form-group">
+      <%= form.label :prescription_id, class: "control-label col-sm-2" %>
+      <div class="col-sm-4">
+        <%= form.select :prescription_id, options_for_select(@prescriptions.map{ |pr| [pr.notes, pr.id, {'notes'=>pr.notes}] }, selected_key = form.object.prescription_id),class: "form-control" %>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= form.label :notes,  class: "control-label col-sm-2" %>
+    <div class="col-sm-4">
+      <%= form.text_area :notes, id: :prescribed_medicine_notes ,class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :before_breakfast ,  class: "control-label col-sm-2"%>
+    <div class="col-sm-4">
+      <%= form.check_box :before_breakfast, id: :prescribed_medicine_before_breakfast %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :after_breakfast ,  class: "control-label col-sm-2"%>
+    <div class="col-sm-4">
+      <%= form.check_box :after_breakfast, id: :prescribed_medicine_after_breakfast%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :before_lunch ,  class: "control-label col-sm-2"%>
+    <div class="col-sm-4">
+      <%= form.check_box :before_lunch, id: :prescribed_medicine_before_lunch%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :after_lunch ,  class: "control-label col-sm-2"%>
+    <div class="col-sm-4">
+      <%= form.check_box :after_lunch, id: :prescribed_medicine_after_lunch %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :before_dinner ,  class: "control-label col-sm-2"%>
+    <div class="col-sm-4">
+      <%= form.check_box :before_dinner, id: :prescribed_medicine_before_dinner %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :after_dinner ,  class: "control-label col-sm-2"%>
+    <div class="col-sm-4">
+      <%= form.check_box :after_dinner, id: :prescribed_medicine_after_dinner %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :available_count ,  class: "control-label col-sm-2"%>
+    <div class="col-sm-4">
+      <%= form.text_field :available_count, id: :prescribed_medicine_available_count,class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'submit', :class => 'btn btn-primary'%> |
+    <%= link_to 'Back', prescribed_medicines_path, class: 'btn btn-secondary'  %>  
+  </div>
+<% end %>

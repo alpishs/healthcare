@@ -1,0 +1,44 @@
+<div style="margin-left:2%;margin-top: 2%;">  
+    
+  <h1>Prescriptions |   <%= link_to 'New Prescription', new_prescription_path, class: 'btn btn-primary'  %></h1>
+  <% if @user %>
+    <h3>User: <%= @user.first_name %>&nbsp;<%= @user.last_name %></h3>
+  <% end %>
+  <% if @doctor %>
+    <h3>Doctor: <%= @doctor.first_name %>&nbsp;<%= @doctor.last_name %></h3>
+  <% end %>
+
+  <table id="prescriptions-records" class="table table-striped table-bordered" style="width: 1000px;">
+    <thead>
+      <tr class="<%= cycle('pure-table-odd', '') -%>">
+        <th>ID</th>
+        <th>User</th>
+        <th>Doctor</th>
+        <th>Notes</th>
+        <th>Prescribed on</th>
+        <th>Valid till</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @prescriptions.each do |prescription| %>
+        <tr class="<%= cycle('pure-table-odd', '') -%>">
+          <td>    <%= link_to prescription_path(prescription.id) do %>
+<%= prescription.id %> <%end%></td>
+          <td><%= prescription.user.first_name%>&nbsp;<%= prescription.user.last_name%></td>
+          <td><%= prescription.doctor.first_name%>&nbsp;<%= prescription.doctor.last_name%></td>
+          <td><%= prescription.notes %></td>
+          <td><%= prescription.prescribed_on %></td>
+          <td><%= prescription.valid_till %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#prescriptions-records').DataTable();
+  });
+</script>
+

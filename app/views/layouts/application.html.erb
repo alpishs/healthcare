@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>3M Healthcare</title>
+		<%= csrf_meta_tags %>
+
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <%= yield :charts_js %>
+	</head>
+
+	<body class="d-flex flex-column min-vh-100">
+		<div class="sidenav">
+			<ul class="nav sidebar-nav">
+				<li class="pure-menu-item">
+					<a class="brand-name">3M Health Care</a>
+				</li>
+				<li class="pure-menu-item">
+					<%= link_to 'Home', "/", class: 'pure-menu-link'  %>
+				</li>
+				<li class="pure-menu-item">
+					<%= link_to 'Doctors', doctors_path, class: 'pure-menu-link'  %>
+				</li>
+				<li class="pure-menu-item">
+					<%= link_to 'Users', users_path, class: 'pure-menu-link'  %>
+				</li>
+				<li class="pure-menu-item">
+					<%= link_to 'Doctor Appointments', doctor_appointments_path, class: 'pure-menu-link'  %>
+				</li>
+				<li class="pure-menu-item">
+					<%= link_to 'Prescriptions', prescriptions_path, class: 'pure-menu-link'  %>
+				</li>
+				<li class="pure-menu-item">
+					<%= link_to 'Prescribed Medicines', prescribed_medicines_path, class: 'pure-menu-link'  %>
+				</li>
+				<li class="pure-menu-item">
+					<%= link_to 'Medicines', medicines_path, class: 'pure-menu-link'  %>
+				</li>
+				<!--
+				<li class="pure-menu-item">
+					<%= link_to 'Doctor Notifications', "doctor_notifications_path", class: 'pure-menu-link'  %>
+				</li>
+			
+				<li class="pure-menu-item">
+					<%= link_to 'In Patients', "in_patients_path", class: 'pure-menu-link'  %>
+				</li>
+				<li class="pure-menu-item">
+					<%= link_to 'Medicine Intake Logs', "medicine_intake_logs_path", class: 'pure-menu-link' %>
+				</li>
+
+				<li class="pure-menu-item">
+					<%= link_to 'User Vitals logs', "user_vital_logs_path", class: 'pure-menu-link'  %>
+				</li>
+				<li class="pure-menu-item">
+					<%= link_to 'User Vitals Summary', "user_vital_summary_path", class: 'pure-menu-link'  %>
+				</li> -->
+				<li class="pure-menu-item"><%= link_to 'About', about_index_path, class: 'pure-menu-link'  %></li>
+			</ul>
+		</div>
+
+		<div id="flash-messages">
+		  <% flash.each do |name, msg| %>
+		    <% if msg.is_a?(String) %>
+		      <%= content_tag :div, msg, :class => "alert alert-info flash_#{name}" %>
+		    <% end %>
+		  <% end %>
+		</div>
+
+		<%= yield %>
+    	<footer class="mt-auto bg-light text-center text-lg-start">
+		  <!-- Copyright -->
+		  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+		    © 2021 Copyright:
+		    <a class="text-dark" href="https://mdbootstrap.com/">3M HealthCare - Designed By Alpish Singhal</a>
+		  </div>
+		  <!-- Copyright -->
+		</footer>
+		</body>
+</html>
+
+<script type="text/javascript">
+	$(function(){
+	   var flashDurationInSeconds = 3;
+	   var flashContainerId = 'flash-messages';
+
+	   function removeFlashMessages() {
+	     $('#' + flashContainerId).remove();
+	   }
+
+	   setTimeout(removeFlashMessages, flashDurationInSeconds * 1000);
+	})
+</script>

@@ -1,0 +1,53 @@
+<%= form_with(model: medicine, class: 'pure-form pure-form-aligned', local: true) do |form| %>
+  <% if medicine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(medicine.errors.count, "error") %> prohibited this medicine from being saved:</h2>
+
+      <ul>
+      <% medicine.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, class: "control-label col-sm-2" %>
+    <div class="col-sm-4">
+      <%= form.text_field :name, id: :medicine_name, class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, class: "control-label col-sm-2" %>
+    <div class="col-sm-4">
+      <%= form.text_area :description, id: :medicine_description, class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :medicine_type, class: "control-label col-sm-2" %>
+    <div class="col-sm-4">
+      <%= form.check_box :medicine_type, id: :medicine_medicine_type%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :is_acidic, class: "control-label col-sm-2" %>
+    <div class="col-sm-4">
+      <%= form.check_box :is_acidic, id: :medicine_is_acidic%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :infant_safe, class: "control-label col-sm-2" %>
+    <div class="col-sm-4">
+      <%= form.check_box :infant_safe, id: :medicine_infant_safe%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit 'submit', class: 'btn btn-primary'%> |
+    <%= link_to 'Back', medicines_path, class: 'btn btn-secondary'  %>
+  </div>
+<% end %>

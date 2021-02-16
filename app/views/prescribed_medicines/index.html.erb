@@ -1,0 +1,58 @@
+<div style="margin-left:2%;margin-top: 2%;margin-bottom: 2%;">  
+  
+  <h1>Prescribed Medicines |   <%= link_to 'New Prescribed Medicine', new_prescribed_medicine_path, class: 'btn btn-primary' %></h1>
+
+  <% if @medicine %>
+    <h3>Medicine: <%= @medicine.name%></h3>
+  <% end %>
+  <% if @prescription %>
+    <h3>Prescription: <%= @prescription.notes %></h3>
+  <% end %>
+
+  <table id="prescribed_medicines-records" class="table table-striped table-bordered" style="width: 1000px;">
+    <thead>
+      <tr class="<%= cycle('pure-table-odd', '') -%>">
+        <th>ID</th>
+        <th>Medicine</th>
+        <th>Prescription</th>
+        <th>Notes</th>
+        <th>Before breakfast</th>
+        <th>After breakfast</th>
+        <th>Before lunch</th>
+        <th>After lunch</th>
+        <th>Before dinner</th>
+        <th>After dinner</th>
+        <th>Available Count</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @prescribed_medicines.each do |prescribed_medicine| %>
+        <tr class="<%= cycle('pure-table-odd', '') -%>">
+          <td>    <%= link_to prescribed_medicine_path(prescribed_medicine.id) do %>
+<%= prescribed_medicine.id %> <%end%></td>
+          <td><%= prescribed_medicine.medicine.name %></td>
+          <td><%= prescribed_medicine.prescription.notes %></td>
+          <td><%= prescribed_medicine.notes %></td>
+          <td><%= prescribed_medicine.before_breakfast %></td>
+          <td><%= prescribed_medicine.after_breakfast %></td>
+          <td><%= prescribed_medicine.before_lunch %></td>
+          <td><%= prescribed_medicine.after_lunch %></td>
+          <td><%= prescribed_medicine.before_dinner %></td>
+          <td><%= prescribed_medicine.after_dinner %></td>
+          <td><%= prescribed_medicine.available_count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h3>Visualisation</h3>
+  <%= pie_chart @prescribed_medicines.group(:medicine).sum(:available_count).map{|m, count| [m.name, count]} %>
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#prescribed_medicines-records').DataTable();
+  });
+</script>

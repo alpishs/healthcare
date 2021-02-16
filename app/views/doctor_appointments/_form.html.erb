@@ -1,0 +1,63 @@
+<%= form_with(model: doctor_appointment, class: 'pure-form pure-form-aligned', local: true) do |form| %>
+  <% if doctor_appointment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(doctor_appointment.errors.count, "error") %> prohibited this doctor_appointment from being saved:</h2>
+
+      <ul>
+      <% doctor_appointment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :description, class: "control-label col-sm-2" %>
+    <div class="col-sm-4">
+      <%= form.text_area :description, id: :doctor_appointment_description, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :from , class: "control-label col-sm-2" %>
+    <div class="col-sm-4">
+      <%= form.datetime_select :from, id: :doctor_appointment_from, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :to , class: "control-label col-sm-2"%>
+    <div class="col-sm-4">
+      <%= form.datetime_select :to, id: :doctor_appointment_to,  class: "form-control" %>
+    </div>
+  </div>
+
+
+  <% if @doctor %>
+    <div>Doctor: <%= @doctor.first_name %>&nbsp;<%= @doctor.last_name %></div>
+    <%= form.hidden_field :doctor_id, :value => @doctor.id%>
+  <% else %>
+    <div class="form-group">
+      <%= form.label :doctor_id , class: "control-label col-sm-2" %>
+      <div class="col-sm-4">
+        <%= form.select :doctor_id, options_for_select(@doctors.map{ |d| [d.first_name+' '+d.last_name, d.id, {'username'=>d.username}] }, selected_key = form.object.doctor_id) ,  class: "form-control" %>
+      </div>
+    </div>
+  <% end %>
+  <% if @user %>
+    <div>User: <%= @user.first_name %>&nbsp;<%= @user.last_name %></div>
+    <%= form.hidden_field :user_id, :value => @user.id%>
+  <% else %>
+    <div class="form-group">
+      <%= form.label :user_id  , class: "control-label col-sm-2" %>
+      <div class="col-sm-4">
+        <%= form.select :user_id, options_for_select(@users.map{ |u| [u.first_name+' '+u.last_name, u.id, {'username'=>u.username}] }, selected_key = form.object.user_id) ,  class: "form-control" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.submit 'submit', :class => 'btn btn-primary'%> |
+    <%= link_to 'Back', doctor_appointments_path, class: 'btn btn-secondary'  %>
+  </div>
+<% end %>
